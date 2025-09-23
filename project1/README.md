@@ -1,38 +1,40 @@
-# sv
+# Cooker
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A cooking tracking app.
 
-## Creating a project
+## Design
 
-If you're seeing this, you've probably already done this step. Congrats!
+The design was informed by sketches and two surveys.
+Participants indicated a lack of time for cooking and a desire to track the ingredients in their pantry.
+This necessitated a quick, responsive design with an ingredient tracker.
 
-```sh
-# create a new project in the current directory
-npx sv create
+This was the proposed sketch:
+![Cooker Sketch](https://github.com/as7erism/cs5167/blob/project1/design.png?raw=true)
 
-# create a new project in my-app
-npx sv create my-app
-```
+Users liked the clean design but found it difficult to understand.
 
-## Developing
+## Documentation
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This app has two screens: the main page, and the goal tracking page.
 
-```sh
-npm run dev
+### The Main Page
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+![Cooker Main Page](https://github.com/as7erism/cs5167/blob/project1/final.png?raw=true)
 
-## Building
+This page displays allows you to add meals and ingredients.
 
-To create a production version of your app:
+To add a meal, click the '+' on the rightmost pane.
+You will be prompted to enter a meal name and an optional image.
+You can also edit a meal by clicking on its pane.
 
-```sh
-npm run build
-```
+To add an ingredient, enter the ingredient name in the ingredient input box and click 'Add'.
+You can remove ingredients by clicking on them.
 
-You can preview the production build with `npm run preview`.
+You can navigate through your daily history by clicking on the arrow emojis next to the date.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### The Goal Tracking Page
+
+![Goal Tracking Page](https://github.com/as7erism/cs5167/blob/project1/goalgraph.png?raw=true)
+
+This page currently offers no interactivity, but it shows your progress in comparison to a potential goal on a line graph.
+More work will be done here in the future.
