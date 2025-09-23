@@ -42,12 +42,12 @@
     return count;
   }
 
-  function getId(date, index) {
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}-i${index}`;
+  function getId(dateIndex, mealIndex) {
+    return `${dateIndex}.${mealIndex}`;
   }
 
   function submitMeal(index: number, name: string, pictureSrc?: string) {
-    const id = getId(currentDate, index);
+    const id = getId(current, index);
 
     if (pictureSrc) {
       localStorage.setItem(id, pictureSrc);
@@ -86,6 +86,7 @@
     <h1>hello <b>{name}</b></h1>
     <h2>you've been cooking for <b>{history.length}</b> days!</h2>
     <h2>streak: <b>{calculateStreak(history)}</b> days 🔥</h2>
+    <h3 class="text-indigo-500"><a href="/goal">set a goal!</a></h3>
   </div>
 </div>
 
@@ -118,12 +119,12 @@
     {#each history[current] as meal, i}
       {#if editing.has(i)}
         <div
-          class="p-2 flex items-center flex-col bg-slate-800 p-2 rounded-lg w-85 max-w-85 h-85 max-h-85"
+          class="flex items-center flex-col bg-slate-800 p-2 rounded-lg w-85 max-w-85 h-85 max-h-85"
         >
           <MealInput
             name={meal}
-            id={getId(currentDate, i)}
-            pictureSrc={localStorage.getItem(getId(currentDate, i)) ?? ""}
+            id={getId(current, i)}
+            pictureSrc={localStorage.getItem(getId(current, i)) ?? ""}
             submitCallback={(name, pictureSrc) =>
               submitMeal(i, name, pictureSrc)}
             cancelCallback={() => editing.delete(i)}
@@ -139,7 +140,7 @@
           >
             <Meal
               name={meal}
-              pictureSrc={localStorage.getItem(getId(currentDate, i)) ?? ""}
+              pictureSrc={localStorage.getItem(getId(current, i)) ?? ""}
             />
           </button>
         </div>
@@ -153,9 +154,9 @@
         <MealInput
           name=""
           pictureSrc=""
-          id={getId(currentDate, currentNumMeals)}
+          id={getId(current, currentNumMeals)}
           submitCallback={addMeal}
-          cancelCallback={() => addingNew = false}
+          cancelCallback={() => (addingNew = false)}
         />
       </div>
     {:else}
@@ -202,7 +203,11 @@
         </button>
       {/each}
 
-      <input class="hover:inset-shadow-sm rounded-lg bg-slate-900 text-center text-xl p-2" id="ingredientInput" bind:value={ingredientInput} />
+      <input
+        class="hover:inset-shadow-sm rounded-lg bg-slate-900 text-center text-xl p-2"
+        id="ingredientInput"
+        bind:value={ingredientInput}
+      />
       <button
         class="rounded-lg bg-indigo-900 hover:cursor-pointer hover:bg-indigo-800 p-2 text-xl"
         onclick={() => {

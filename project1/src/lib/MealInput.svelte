@@ -7,7 +7,8 @@
     cancelCallback: () => void;
   };
 
-  let { name, pictureSrc, id, submitCallback, cancelCallback }: Props = $props();
+  let { name, pictureSrc, id, submitCallback, cancelCallback }: Props =
+    $props();
 
   let input = $state(name);
   let fileInput = $state();
@@ -39,7 +40,11 @@
 </script>
 
 <div class="flex flex-col items-center gap-4 p-2">
-  <input id={`${id}NameInput`} bind:value={input} class="hover:inset-shadow-sm rounded-lg bg-slate-900 text-center text-xl" />
+  <input
+    id={`${id}NameInput`}
+    bind:value={input}
+    class="hover:inset-shadow-sm rounded-lg bg-slate-900 text-center text-xl"
+  />
 
   <img src={imagePreview} class="object-scale-down max-h-36 rounded-lg" />
   <input
@@ -56,13 +61,16 @@
     <button
       disabled={input.length == 0}
       onclick={() => {
-        submitCallback(input, imagePreview.length > 0 ? imagePreview : undefined);
+        submitCallback(
+          input,
+          imagePreview.length > 0 ? imagePreview : undefined,
+        );
         input = "";
         fileInput = "";
         imagePreview = "";
       }}
       class="rounded-lg bg-indigo-950 enabled:bg-indigo-900 hover:enabled:cursor-pointer hover:enabled:bg-indigo-800 p-1"
-    >Submit</button
+      >Submit</button
     >
 
     <button
@@ -73,7 +81,7 @@
         imagePreview = "";
       }}
       class="rounded-lg bg-slate-700 hover:cursor-pointer hover:bg-slate-600 p-1"
-    >Cancel</button
+      >Cancel</button
     >
   </div>
 </div>
